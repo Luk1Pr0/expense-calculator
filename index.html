@@ -5,15 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Calculator</title>
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#">Expenses</a></li>
-            <li><a href="#">Income</a></li>
-        </ul>
-    </nav>
     <section>
+        <div class="background-video-container">
+            <div class="video-overlay"></div>
+            <video src="finance.mp4" autoplay loop></video>
+        </div>
+        <div class="container">
+            <div class="input-container">
+                <label for="date">Select date of expense</label>
+                <input id="date-selector" type="date">
+                <label for="input-value">Enter amount spent</label>
+                <input id="input-value" type="text" placeholder="Enter value">
+                <button type="submit">Submit</button>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="data-container">
+                <div class="expense-content">
+                    <h3>Amount spent: <span>--</span>pln</h3>
+                    <p>Date: <span>--/--/---</span></p>
+                    <button><i class="fas fa-angle-double-down"></i></button>
+                </div>
+                <div class="expense-content">
+                    <h3>Amount spent: <span>--</span>pln</h3>
+                    <p>Date: <span>--/--/----</span></p>
+                    <button><i class="fas fa-angle-double-down"></i></button>
+                </div>
+            </div>
+        </div>
     </section>
     <script src="app.js"></script>
 </body>

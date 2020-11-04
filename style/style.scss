@@ -1,16 +1,29 @@
 // Variables
 $navBackground: rgb(0, 146, 151);
-$background: rgb(0, 145, 150);
-$boxShadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
+$background: rgba(0, 0, 0, 0.2);
+$videoOverlay: rgba(0, 0, 0, 0.8);
+$boxShadow: 0 0 5px 1px rgba(0, 0, 0, 1);
+$border: 1px solid black;
 $fontSize: 1rem;
+$fontColor: white;
 
 // Mixins
 @mixin flex {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
 }
 
+@mixin buttonStyle {
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 1%;
+}
+
+// Styling
 * {
     margin: 0;
     padding: 0;
@@ -18,9 +31,10 @@ $fontSize: 1rem;
 }
 
 body {
-    background: $background;
     font-size: $fontSize;
     width: 100%;
+    background: white;
+    color: $fontColor;
 }
 
 a {
@@ -28,9 +42,34 @@ a {
     text-decoration: none;
 }
 
+i {
+    font-size: 2rem;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    color: white;
+    transition: 0.3s ease;
+}
+
+i:hover {
+    color: yellow;
+}
+
+i:active {
+    transform: scale(0.5);
+}
+
+input {
+    outline: none;
+    border: $border;
+    padding: 0.3rem;
+    margin: 0.5rem;
+}
+
 nav {
-    position: fixed;
+    position: absolute;
     z-index: 15;
+    min-width: 7%;
 }
 
 nav ul {
@@ -39,7 +78,6 @@ nav ul {
     justify-content: space-evenly;
     list-style-type: none;
     background: $navBackground;
-    box-shadow: $boxShadow;
 }
 
 nav ul li {
@@ -63,8 +101,72 @@ nav ul li a {
 }
 
 section {
-    // background: rgba(100, 100, 0, 0.5);
+    @include flex();
+    background: $background;
     width: 100%;
-    height: 100vh;
-    padding: 3rem;
+    overflow-x: hidden;
+}
+
+.background-video-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.background-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    background: $videoOverlay;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 2;
+}
+
+.container {
+    @include flex();
+    width: 90%;
+    height: 100%;
+    padding: 1rem;
+    z-index: 3;
+    margin: 1rem;
+}
+
+.input-container {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+button {
+    @include buttonStyle();
+}
+
+.data-container {
+    @include flex();
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.expense-content {
+    width: 48%;
+    min-height: 2%;
+    margin: 0.5%;
+    padding: 0.5%;
+    text-align: center;
+    background: rgba(150, 150, 255, 0.5);
+    box-shadow: $boxShadow;
+}
+
+.expense-content h3 {
+    margin: 1%;
+}
+
+@media screen and (max-width: 1000px) {
 }
