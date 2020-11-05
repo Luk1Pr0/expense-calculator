@@ -6,6 +6,7 @@
     <title>Expense Calculator</title>
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="icon" href="favicon.png">
 </head>
 <body>
     <section>
@@ -15,26 +16,23 @@
         </div>
         <div class="container">
             <div class="input-container">
-                <label for="date">Select date of expense</label>
-                <input id="date-selector" type="date">
-                <label for="input-value">Enter amount spent</label>
-                <input id="input-value" type="text" placeholder="Enter value">
-                <button type="submit">Submit</button>
+                <form id="expense-form">
+                    <label for="date">Select date of expense</label>
+                    <input id="date-selector" type="date" required>
+                    <label for="input-value">Enter amount spent</label>
+                    <input id="input-value" type="number" placeholder="Enter value" required>
+                    <button id="submit-button" class="submit-button" type="submit">Submit</button>
+                </form>
             </div>
         </div>
     </section>
     <section>
         <div class="container">
-            <div class="data-container">
-                <div class="expense-content">
-                    <h3>Amount spent: <span>--</span>pln</h3>
-                    <p>Date: <span>--/--/---</span></p>
-                    <button><i class="fas fa-angle-double-down"></i></button>
-                </div>
-                <div class="expense-content">
-                    <h3>Amount spent: <span>--</span>pln</h3>
-                    <p>Date: <span>--/--/----</span></p>
-                    <button><i class="fas fa-angle-double-down"></i></button>
+            <div class="data-container" id="data-container">
+                <div class="expense-card" id="expense-card">
+                    <h3>Amount spent: <span id="money-amount">--</span> pln</h3>
+                    <p>Date: <span id="date-spent">--/--/---</span></p>
+                    <button title="Show details" class="arrow-button"><i class="fas fa-angle-double-down"></i></button>
                 </div>
             </div>
         </div>
