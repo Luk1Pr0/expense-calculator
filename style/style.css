@@ -20,7 +20,6 @@ body {
 
 header {
   width: 30%;
-  background: chartreuse;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,6 +31,8 @@ header {
       -ms-flex-align: center;
           align-items: center;
   padding: 5rem 0;
+  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
 }
 
 form {
@@ -54,11 +55,38 @@ input {
 }
 
 .total-expenses-container {
-  padding: 2rem;
+  padding: 2rem 0;
 }
 
 section {
   width: 70%;
-  background: ghostwhite;
+  padding: 2rem;
+}
+
+.expense-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.expense-card {
+  width: 25%;
+  margin: 2rem;
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 15px;
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.expense-card h2 {
+  margin: 10px;
+}
+
+.expense-card h3 {
+  margin: 10px;
 }
 /*# sourceMappingURL=style.css.map */
