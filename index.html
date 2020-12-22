@@ -1,42 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Calculator</title>
-    <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <link rel="icon" href="favicon.png">
+    <title>Expense</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
+
 <body>
-    <section>
-        <div class="background-video-container">
-            <div class="video-overlay"></div>
-            <video src="finance.mp4" autoplay loop></video>
-        </div>
-        <div class="container">
-            <div class="input-container">
-                <form id="expense-form">
-                    <label for="date">Select date of expense</label>
-                    <input id="date-selector" type="date" required>
-                    <label for="input-value">Enter amount spent</label>
-                    <input id="input-value" type="number" placeholder="Enter value" required>
-                    <button id="submit-button" class="submit-button" type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="container">
-            <div class="data-container" id="data-container">
-                <div class="expense-card" id="expense-card">
-                    <h3>Amount spent: <span id="money-amount">--</span> pln</h3>
-                    <p>Date: <span id="date-spent">--/--/---</span></p>
-                    <button title="Show details" class="arrow-button"><i class="fas fa-angle-double-down"></i></button>
+    <header>
+        <div class="form-container">
+            <form>
+                <input type="date">
+                <input type="text" placeholder='Enter expense amount'>
+                <div class="button-container">
+                    <button type='submit'>Submit</button>
                 </div>
+            </form>
+            <div class="total-expenses-container">
+                <h3>Total expenses: £25</h3>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="expense-container">
+            <div class="expense-card">
+                <h2>Expense amount</h2>
+                <h3>Date of expense</h3>
+            </div>
+            <div class="expense-card">
+                <h2>Expense amount</h2>
+                <h3>Date of expense</h3>
             </div>
         </div>
     </section>
-    <script src="app.js"></script>
 </body>
+
 </html>
