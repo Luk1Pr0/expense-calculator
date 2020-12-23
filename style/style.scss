@@ -1,3 +1,12 @@
+// Variables
+$background: rgb(63, 60, 60);
+$mainColor: rgb(255, 255, 255);
+$buttonBorder: 1px solid rgb(255, 255, 255);
+
+@mixin buttonHover {
+    border: 1px solid crimson;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,20 +15,22 @@
 }
 
 body {
-    background: chocolate;
+    background: $background;
+    color: $mainColor;
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: space-between;
+    font-size: 1rem;
 }
 
 header {
-    width: 30%;
+    min-width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 5rem 0;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 form {
@@ -31,7 +42,40 @@ form {
 input {
     width: 100%;
     margin: 10px;
-    padding: 5px;
+    padding: 10px;
+    border: $buttonBorder;
+    outline: none;
+    background: $background;
+    color: $mainColor;
+}
+
+input:focus {
+    @include buttonHover();
+}
+
+input::placeholder {
+    color: $mainColor;
+}
+
+button {
+    outline: none;
+    border: $buttonBorder;
+    padding: 5px 10px;
+    margin: 10px;
+    background: transparent;
+    color: $mainColor;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    border: 1px solid crimson;
+    background: crimson;
+}
+
+button:focus {
+    outline: none;
 }
 
 .total-expenses-container {
@@ -50,10 +94,10 @@ section {
 }
 
 .expense-card {
-    width: 25%;
+    min-width: 25%;
     margin: 2rem;
     padding: 1rem;
-    border: 2px solid black;
+    border: 2px solid $mainColor;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
@@ -64,4 +108,38 @@ section {
 
 .expense-card h3 {
     margin: 10px;
+}
+
+.expense-card:hover {
+    border: 2px solid crimson;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: start;
+    }
+    header {
+        width: 100%;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        padding: 1rem;
+    }
+    .total-expenses-container {
+        padding: 0;
+    }
+    section {
+        width: 100%;
+        padding: 1rem;
+    }
+    .expense-container {
+        width: 100%;
+        justify-content: space-around;
+    }
+    .expense-card {
+        min-width: 40%;
+        margin: 1rem;
+    }
 }

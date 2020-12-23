@@ -7,7 +7,8 @@
 }
 
 body {
-  background: chocolate;
+  background: #3f3c3c;
+  color: white;
   width: 100%;
   height: 100vh;
   display: -webkit-box;
@@ -16,10 +17,11 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  font-size: 1rem;
 }
 
 header {
-  width: 30%;
+  min-width: 30%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -31,8 +33,8 @@ header {
       -ms-flex-align: center;
           align-items: center;
   padding: 5rem 0;
-  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
-          box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 form {
@@ -51,7 +53,53 @@ form {
 input {
   width: 100%;
   margin: 10px;
-  padding: 5px;
+  padding: 10px;
+  border: 1px solid white;
+  outline: none;
+  background: #3f3c3c;
+  color: white;
+}
+
+input:focus {
+  border: 1px solid crimson;
+}
+
+input::-webkit-input-placeholder {
+  color: white;
+}
+
+input:-ms-input-placeholder {
+  color: white;
+}
+
+input::-ms-input-placeholder {
+  color: white;
+}
+
+input::placeholder {
+  color: white;
+}
+
+button {
+  outline: none;
+  border: 1px solid white;
+  padding: 5px 10px;
+  margin: 10px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  border: 1px solid crimson;
+  background: crimson;
+}
+
+button:focus {
+  outline: none;
 }
 
 .total-expenses-container {
@@ -73,10 +121,10 @@ section {
 }
 
 .expense-card {
-  width: 25%;
+  min-width: 25%;
   margin: 2rem;
   padding: 1rem;
-  border: 2px solid black;
+  border: 2px solid white;
   border-radius: 15px;
   -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
@@ -88,5 +136,52 @@ section {
 
 .expense-card h3 {
   margin: 10px;
+}
+
+.expense-card:hover {
+  border: 2px solid crimson;
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: start;
+  }
+  header {
+    width: 100%;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    padding: 1rem;
+  }
+  .total-expenses-container {
+    padding: 0;
+  }
+  section {
+    width: 100%;
+    padding: 1rem;
+  }
+  .expense-container {
+    width: 100%;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .expense-card {
+    min-width: 40%;
+    margin: 1rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */
