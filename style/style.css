@@ -18,10 +18,12 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
   font-size: 1rem;
+  overflow: hidden;
 }
 
 header {
-  min-width: 30%;
+  min-width: 20%;
+  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -107,8 +109,10 @@ button:focus {
 }
 
 section {
-  width: 70%;
+  position: relative;
+  width: 80%;
   padding: 2rem;
+  overflow-x: auto;
 }
 
 .expense-container {
@@ -156,6 +160,7 @@ section {
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: start;
+    overflow-x: hidden;
   }
   header {
     width: 100%;
@@ -166,6 +171,7 @@ section {
     -ms-flex-pack: distribute;
         justify-content: space-around;
     padding: 1rem;
+    height: auto;
   }
   .total-expenses-container {
     padding: 0;
@@ -180,7 +186,7 @@ section {
         justify-content: space-around;
   }
   .expense-card {
-    min-width: 40%;
+    width: 40%;
     margin: 1rem;
   }
 }

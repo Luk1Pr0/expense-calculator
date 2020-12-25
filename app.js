@@ -11,9 +11,12 @@ let value = 0;
 // Get input from the form
 function getInput(e) {
     e.preventDefault();
-    date = datePicker.value;
-    value = expense.value;
-    updateDOM();
+    console.log(value, date);
+    if (!date.length || !value.length) {
+        date = datePicker.value;
+        value = expense.value;
+        updateDOM();
+    }
 }
 
 // Append the element with the date and expense to DOM
@@ -27,8 +30,6 @@ function updateDOM() {
     expenseCard.append(header2, header3);
     expenseContainer.appendChild(expenseCard);
 }
-
-
 
 expenseForm.addEventListener('submit', getInput);
 
