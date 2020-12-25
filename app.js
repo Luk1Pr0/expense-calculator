@@ -12,11 +12,9 @@ let value = 0;
 function getInput(e) {
     e.preventDefault();
     console.log(value, date);
-    if (!date.length || !value.length) {
-        date = datePicker.value;
-        value = expense.value;
-        updateDOM();
-    }
+    date = datePicker.value;
+    value = expense.value;
+    updateDOM();
 }
 
 // Append the element with the date and expense to DOM
