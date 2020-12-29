@@ -4,11 +4,13 @@ const expense = document.querySelectorAll('input')[1];
 const expenseForm = document.querySelector('form');
 const submitBtn = document.getElementById('form-button');
 const expenseContainer = document.querySelector('.expense-container');
-const totalExpense = document.getElementById('total-expense');
+const totalExpense = parseFloat(document.getElementById('total-expense').textContent);
 
-let date = "";
+let date = Date;
 let value = 0;
 let defaultId = 0;
+let expenseValue = 0;
+
 let expenseObj = {};
 let expenses = [];
 
@@ -18,7 +20,7 @@ function getInput(e) {
     if (datePicker.value || expense.value) {
         // Get values of date and expense
         date = datePicker.value;
-        value = expense.value;
+        value = parseInt(expense.value);
         // Set keys and their values for the expense object
         expenseObj.date = date;
         expenseObj.expense = value;
@@ -27,7 +29,7 @@ function getInput(e) {
         updateDOM();
     }
     datePicker.value = '';
-    expense.value = '';
+    expense.value = 0;
 }
 
 // Append the element with the date and expense to DOM
@@ -46,21 +48,7 @@ function updateDOM() {
     updateLocalStorage();
 }
 
-// Append expense array to localStorage
-function updateLocalStorage() {
-    localStorage.setItem('expenses', JSON.stringify(expenses));
-}
-
-// Update DOM with local storage 
-function updateFromLocalStorage() {
-    if (localStorage.getItem('expenses')) {
-        expenses = JSON.parse(localStorage.getItem('expenses'));
-        // console.log('expense array', expenses);
-        rebuildDOM();
-    }
-}
-
-// Rebuild DOM with the local storage items
+// Rebuild DOM from the local storage
 function rebuildDOM() {
     expenses.forEach(expense => {
         // Create elements that need to be appended to DOM
@@ -74,10 +62,30 @@ function rebuildDOM() {
         // Append data to the expense card and expense card to the container
         expenseCard.append(header2, header3);
         expenseContainer.appendChild(expenseCard);
+        calculateTotalExpense();
     });
 }
 
-// Get items from local storage
+function calculateTotalExpense() {
+    // Calculate total expense out of all expenses
+    console.log(expenses[0]);
+}
+
+// Append expense array to localStorage
+function updateLocalStorage() {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+}
+
+// Update DOM with local storage 
+function updateFromLocalStorage() {
+    if (localStorage.getItem('expenses')) {
+        expenses = JSON.parse(localStorage.getItem('expenses'));
+        rebuildDOM();
+    }
+}
+
+// Get items from local storage on load
 updateFromLocalStorage();
 
+// Event listeners
 expenseForm.addEventListener('submit', getInput);

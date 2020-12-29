@@ -10,23 +10,34 @@
 
 <body>
     <header>
+
+        <!-- Form container -->
         <div class="form-container">
             <form>
+                <!-- Date input -->
                 <input type="date" required title="Select a date of the expense">
+                <!-- Expense value input -->
                 <input type="text" placeholder='Enter expense amount' required title="Select the expense amount">
+                <!-- Submit button container -->
                 <div class="button-container">
                     <button id="form-button" type='submit'>Submit</button>
                 </div>
             </form>
         </div>
+
+        <!-- Total expense container -->
         <div class=" total-expenses-container">
             <h2>Total expenses:<br><br><span id='total-expense'>0</span></h2>
         </div>
+
     </header>
+
     <section>
+        <!-- Expense container for expense cards -->
         <div class="expense-container">
         </div>
     </section>
+
     <script src="app.js"></script>
 </body>
 
