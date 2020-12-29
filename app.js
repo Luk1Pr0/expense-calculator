@@ -4,12 +4,12 @@ const expense = document.querySelectorAll('input')[1];
 const expenseForm = document.querySelector('form');
 const submitBtn = document.getElementById('form-button');
 const expenseContainer = document.querySelector('.expense-container');
-const totalExpense = parseFloat(document.getElementById('total-expense').textContent);
+const totalExpenseEl = document.getElementById('total-expense');
 
 let date = Date;
 let value = 0;
 let defaultId = 0;
-let expenseValue = 0;
+let totalExpense = 0;
 
 let expenseObj = {};
 let expenses = [];
@@ -17,7 +17,7 @@ let expenses = [];
 // Get input from the form
 function getInput(e) {
     e.preventDefault();
-    if (datePicker.value || expense.value) {
+    if (datePicker.value && expense.value) {
         // Get values of date and expense
         date = datePicker.value;
         value = parseInt(expense.value);
@@ -29,7 +29,7 @@ function getInput(e) {
         updateDOM();
     }
     datePicker.value = '';
-    expense.value = 0;
+    expense.value = '';
 }
 
 // Append the element with the date and expense to DOM
@@ -62,13 +62,15 @@ function rebuildDOM() {
         // Append data to the expense card and expense card to the container
         expenseCard.append(header2, header3);
         expenseContainer.appendChild(expenseCard);
-        calculateTotalExpense();
     });
 }
 
 function calculateTotalExpense() {
     // Calculate total expense out of all expenses
-    console.log(expenses[0]);
+    expenses.forEach(expense => {
+        let sum = totalExpense += expense.expense;
+        totalExpenseEl.textContent = expense.expense;
+    });
 }
 
 // Append expense array to localStorage
@@ -80,6 +82,7 @@ function updateLocalStorage() {
 function updateFromLocalStorage() {
     if (localStorage.getItem('expenses')) {
         expenses = JSON.parse(localStorage.getItem('expenses'));
+        calculateTotalExpense();
         rebuildDOM();
     }
 }
