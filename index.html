@@ -12,15 +12,15 @@
     <header>
         <div class="form-container">
             <form>
-                <input type="date">
-                <input type="text" placeholder='Enter expense amount'>
+                <input type="date" required title="Select a date of the expense">
+                <input type="text" placeholder='Enter expense amount' required title="Select the expense amount">
                 <div class="button-container">
                     <button id="form-button" type='submit'>Submit</button>
                 </div>
             </form>
         </div>
         <div class=" total-expenses-container">
-            <h2 id='total-expense'>Total expenses:<br><br>£25</h2>
+            <h2>Total expenses:<br><br><span id='total-expense'>0</span></h2>
         </div>
     </header>
     <section>

@@ -4,17 +4,22 @@ const expense = document.querySelectorAll('input')[1];
 const expenseForm = document.querySelector('form');
 const submitBtn = document.getElementById('form-button');
 const expenseContainer = document.querySelector('.expense-container');
+const totalExpense = document.getElementById('total-expense');
 
 let date = "";
 let value = 0;
+let expenseObj = {};
 
 // Get input from the form
 function getInput(e) {
     e.preventDefault();
-    console.log(value, date);
-    date = datePicker.value;
-    value = expense.value;
-    updateDOM();
+    if (datePicker.value || expense.value) {
+        date = datePicker.value;
+        value = expense.value;
+        updateDOM();
+    }
+    datePicker.value = '';
+    expense.value = '';
 }
 
 // Append the element with the date and expense to DOM
