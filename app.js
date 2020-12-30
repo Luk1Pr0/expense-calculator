@@ -10,6 +10,7 @@ let date = Date;
 let value = 0;
 let defaultId = 0;
 let totalExpense = 0;
+let counter = 0;
 
 let expenseObj = {};
 let expenses = [];
@@ -22,9 +23,8 @@ function getInput(e) {
         date = datePicker.value;
         value = parseInt(expense.value);
         // Set keys and their values for the expense object
-        expenseObj.date = date;
-        expenseObj.expense = value;
-        // Append the expense Object to the expenses
+
+        // Append the expense Object to the expenses and update DOM
         expenses.push(expenseObj);
         updateDOM();
     }
@@ -59,7 +59,7 @@ function rebuildDOM() {
         expenseCard.classList.add('expense-card');
         header2.textContent = `£${expense.expense}`;
         header3.textContent = expense.date;
-        // Append data to the expense card and expense card to the container
+        // Append data to the expense car`d and expense card to the container
         expenseCard.append(header2, header3);
         expenseContainer.appendChild(expenseCard);
     });
@@ -67,10 +67,7 @@ function rebuildDOM() {
 
 function calculateTotalExpense() {
     // Calculate total expense out of all expenses
-    expenses.forEach(expense => {
-        let sum = totalExpense += expense.expense;
-        totalExpenseEl.textContent = expense.expense;
-    });
+
 }
 
 // Append expense array to localStorage
@@ -82,7 +79,6 @@ function updateLocalStorage() {
 function updateFromLocalStorage() {
     if (localStorage.getItem('expenses')) {
         expenses = JSON.parse(localStorage.getItem('expenses'));
-        calculateTotalExpense();
         rebuildDOM();
     }
 }
