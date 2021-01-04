@@ -18,10 +18,11 @@ function getInput(e) {
     e.preventDefault();
     if (datePicker.value && expense.value) {
         // Get values of date and expense
-        date = datePicker.value;
+        date = datePicker.value.split('-').reverse().join('/');
         value = parseInt(expense.value);
+        console.log(date);
         // Create object with expense, date and id
-        const obj = { date, value, id: expenseId += 1 };
+        const obj = { value, date, id: expenseId += 1 };
         // Append the expense Object to the expenses and update DOM
         expenses.push(obj);
         updateDOM();
