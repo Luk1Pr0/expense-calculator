@@ -8,12 +8,11 @@ const totalExpenseEl = document.getElementById('total-expense');
 
 let date = Date;
 let value = 0;
-let defaultId = 0;
-let totalExpense = 0;
-let counter = 0;
+let totalExpense = '';
 
 let expenseObj = {};
 let expenses = [];
+let expenseSum = [];
 
 // Get input from the form
 function getInput(e) {
@@ -23,9 +22,12 @@ function getInput(e) {
         date = datePicker.value;
         value = parseInt(expense.value);
         // Set keys and their values for the expense object
-
+        expenseObj.date = date;
+        expenseObj.value = value;
         // Append the expense Object to the expenses and update DOM
         expenses.push(expenseObj);
+        expenseSum.push(value);
+        console.log(expenseSum);
         updateDOM();
     }
     datePicker.value = '';
@@ -57,17 +59,21 @@ function rebuildDOM() {
         const header3 = document.createElement('h3');
         // Crete data and add class to the card
         expenseCard.classList.add('expense-card');
-        header2.textContent = `£${expense.expense}`;
+        header2.textContent = `£${expense.value}`;
         header3.textContent = expense.date;
-        // Append data to the expense car`d and expense card to the container
+        // Append data to the expense card and expense card to the container
         expenseCard.append(header2, header3);
         expenseContainer.appendChild(expenseCard);
     });
 }
 
 function calculateTotalExpense() {
-    // Calculate total expense out of all expenses
-
+    // Calculate total expense out of all expenses and return new array
+    let sum = expenses.map(expense => {
+        return expense.value;
+    });
+    // Reduce the sum array and get the sum of it
+    totalExpense = `£${sum.reduce((a, b) => a + b, 0)}`;
 }
 
 // Append expense array to localStorage
