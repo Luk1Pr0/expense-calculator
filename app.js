@@ -8,11 +8,10 @@ const totalExpenseEl = document.getElementById('total-expense');
 
 let date = Date;
 let value = 0;
-let totalExpense = '';
+let totalExpense = 0;
+let expenseId = 0;
 
-let expenseObj = {};
 let expenses = [];
-let expenseSum = [];
 
 // Get input from the form
 function getInput(e) {
@@ -21,13 +20,10 @@ function getInput(e) {
         // Get values of date and expense
         date = datePicker.value;
         value = parseInt(expense.value);
-        // Set keys and their values for the expense object
-        expenseObj.date = date;
-        expenseObj.value = value;
+        // Create object with expense, date and id
+        const obj = { date, value, id: expenseId += 1 };
         // Append the expense Object to the expenses and update DOM
-        expenses.push(expenseObj);
-        expenseSum.push(value);
-        console.log(expenseSum);
+        expenses.push(obj);
         updateDOM();
     }
     datePicker.value = '';
@@ -48,6 +44,7 @@ function updateDOM() {
     expenseCard.append(header2, header3);
     expenseContainer.appendChild(expenseCard);
     updateLocalStorage();
+    calculateTotalExpense();
 }
 
 // Rebuild DOM from the local storage
@@ -65,26 +62,30 @@ function rebuildDOM() {
         expenseCard.append(header2, header3);
         expenseContainer.appendChild(expenseCard);
     });
+    calculateTotalExpense();
 }
 
 function calculateTotalExpense() {
     // Calculate total expense out of all expenses and return new array
-    let sum = expenses.map(expense => {
+    let values = expenses.map(expense => {
         return expense.value;
     });
     // Reduce the sum array and get the sum of it
-    totalExpense = `£${sum.reduce((a, b) => a + b, 0)}`;
+    const sum = values.reduce((a, b) => a + b, 0);
+    totalExpenseEl.textContent = sum;
 }
 
 // Append expense array to localStorage
 function updateLocalStorage() {
     localStorage.setItem('expenses', JSON.stringify(expenses));
+    localStorage.setItem('expenseId', expenseId);
 }
 
 // Update DOM with local storage 
 function updateFromLocalStorage() {
     if (localStorage.getItem('expenses')) {
         expenses = JSON.parse(localStorage.getItem('expenses'));
+        expenseId = parseInt(localStorage.getItem('expenseId'));
         rebuildDOM();
     }
 }
