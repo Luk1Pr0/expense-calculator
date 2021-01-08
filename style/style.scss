@@ -2,6 +2,9 @@
 $background: rgb(63, 60, 60);
 $mainColor: rgb(255, 255, 255);
 $buttonBorder: 1px solid rgb(255, 255, 255);
+$totalExpenses: rgb(255, 0, 0)
+$income: rgb(255, 255, 255);
+$leftOver: rgb(72, 255, 0);
 
 @mixin buttonHover {
     border: 1px solid crimson;
@@ -80,8 +83,26 @@ button:focus {
     outline: none;
 }
 
-.total-expenses-container {
-    padding: 2rem 0;
+.details-container {
+    padding: 1rem 0;
+    margin: 1rem 0;
+}
+
+.total-expense {
+    color: $totalExpenses;
+}
+
+.income {
+    color: $income;
+}
+
+.left-over {
+    color: $leftOver;
+}
+
+.value {
+    position: relative;
+    top: 0.8rem;
 }
 
 section {
@@ -150,15 +171,22 @@ section {
         justify-content: start;
         overflow-x: hidden;
     }
+    h2 {
+        font-size: 1.2rem;
+    }
     header {
         width: 100%;
         flex-direction: row-reverse;
         justify-content: space-around;
-        padding: 1rem;
+        padding: 0;
         height: auto;
     }
-    .total-expenses-container {
-        padding: 0;
+    input {
+        margin: 5px 0;
+        padding: 5px;
+    }
+    .details-container {
+        padding: 5px 0;
     }
     section {
         width: 100%;

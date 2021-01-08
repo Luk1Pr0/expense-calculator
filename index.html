@@ -18,6 +18,8 @@
                 <input type="date" required title="Select a date of the expense">
                 <!-- Expense value input -->
                 <input type="text" placeholder='Enter expense amount' required title="Select the expense amount">
+                <!-- Income input -->
+                <input type="text" placeholder='Enter monthly income' required title='Enter total expense'>
                 <!-- Submit button container -->
                 <div class="button-container">
                     <button id="form-button" type='submit'>Submit</button>
@@ -25,9 +27,23 @@
             </form>
         </div>
 
-        <!-- Total expense container -->
-        <div class=" total-expenses-container">
-            <h2>Total expenses:<br><br><span id='total-expense'></span></h2>
+        <div class="data-container" title='Total expenses'>
+            <!-- Income container -->
+            <div class="details-container income">
+                <h2>Monthly income:<br><span class='value'>£</span><span class='value' id='monthly-income'
+                        contenteditable="true" title='Click this to change the income'>--</span><br>
+                </h2>
+            </div>
+
+            <!-- Total expense container -->
+            <div class="details-container total-expense">
+                <h2>Total expenses:<br><span class='value' id='total-expense'>£--</span><br></h2>
+            </div>
+
+            <!-- Money left  container -->
+            <div class="details-container left-over" title='Money left according to income and the expenses'>
+                <h2>Money left:<br><span class='value' id='money-left'>£--</span><br></h2>
+            </div>
         </div>
 
     </header>

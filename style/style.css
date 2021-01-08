@@ -104,8 +104,26 @@ button:focus {
   outline: none;
 }
 
-.total-expenses-container {
-  padding: 2rem 0;
+.details-container {
+  padding: 1rem 0;
+  margin: 1rem 0;
+}
+
+.total-expense {
+  color: #eb0e0e;
+}
+
+.income {
+  color: white;
+}
+
+.left-over {
+  color: #48ff00;
+}
+
+.value {
+  position: relative;
+  top: 0.8rem;
 }
 
 section {
@@ -196,6 +214,9 @@ section {
             justify-content: start;
     overflow-x: hidden;
   }
+  h2 {
+    font-size: 1.2rem;
+  }
   header {
     width: 100%;
     -webkit-box-orient: horizontal;
@@ -204,11 +225,15 @@ section {
             flex-direction: row-reverse;
     -ms-flex-pack: distribute;
         justify-content: space-around;
-    padding: 1rem;
+    padding: 0;
     height: auto;
   }
-  .total-expenses-container {
-    padding: 0;
+  input {
+    margin: 5px 0;
+    padding: 5px;
+  }
+  .details-container {
+    padding: 5px 0;
   }
   section {
     width: 100%;
