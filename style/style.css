@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -110,7 +111,7 @@ button:focus {
 }
 
 .total-expense {
-  color: #eb0e0e;
+  color: #ff3300;
 }
 
 .income {
