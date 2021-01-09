@@ -10,6 +10,7 @@ const monthlyIncomeEl = document.getElementById('monthly-income');
 const moneyLeftEl = document.getElementById('money-left');
 const editIncomeIcon = document.getElementById('edit-icon');
 
+let isActive = false;
 let date = Date;
 let value = 0;
 let income = 0;
@@ -132,25 +133,33 @@ function updateFromLocalStorage() {
     }
 }
 
-let isActive = false;
+function updateIncome(e) {
+    // When enter is pressed then save the new income amount and recalculate leftOver
+    if (e.keyCode === 13 || !isActive) {
+        console.log(isActive);
+        e.preventDefault();
+        monthlyIncomeEl.blur();
+        // If the user edits but leaves the income blank, then set it to previous
+        monthlyIncomeEl.textContent > 0 ? income = monthlyIncomeEl.textContent : monthlyIncomeEl.textContent = income;
+        updateLocalStorage();
+        calculateLeftOver();
+    }
+}
 
 // Get edited expense input and amend it to the DOM and recalculate the leftOver
 function getEditedIncome() {
-    // isActive = true;
-    // console.log('isActive', isActive);
+    isActive = true;
     monthlyIncomeEl.focus();
     monthlyIncomeEl.textContent = '';
-    monthlyIncomeEl.addEventListener('keydown', (e) => {
-        // When enter is pressed then save the new income amount and recalculate leftOver
-        if (e.keyCode === 13) {
-            e.preventDefault();
-            monthlyIncomeEl.blur();
-            // If the user edits but leaves the income blank, then set it to previous
-            monthlyIncomeEl.textContent > 1 ? income = monthlyIncomeEl.textContent : monthlyIncomeEl.textContent = income;
-            updateLocalStorage();
-            calculateLeftOver();
-        }
-    });
+    monthlyIncomeEl.addEventListener('keydown', (e) => updateIncome(e));
+}
+
+// If the click target is outside the income edit icon, then set the isActive to false and update income
+function clickedOutsideIncome(e) {
+    if (e.target !== editIncomeIcon) {
+        isActive = false;
+        updateIncome(e);
+    }
 }
 
 // Get items from local storage on load
@@ -160,3 +169,4 @@ checkIncomeValue();
 // Event listeners
 expenseForm.addEventListener('submit', getInput);
 editIncomeIcon.addEventListener('click', getEditedIncome);
+document.addEventListener('click', (e) => clickedOutsideIncome(e));
