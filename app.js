@@ -23,6 +23,7 @@ let expenses = [];
 // Get input from the form
 function getInput(e) {
     e.preventDefault();
+    console.log('working');
     if (datePicker.value && expense.value) {
         // Get values of date and expense
         date = datePicker.value.split('-').reverse().join('/');
@@ -114,6 +115,26 @@ function checkIncomeValue() {
     }
 }
 
+function updateIncome(e) {
+    // When enter is pressed or if isActive is false then save the new income amount and recalculate leftOver
+    if (e.keyCode === 13 || !isActive) {
+        e.preventDefault();
+        monthlyIncomeEl.blur();
+        // If the user edits but leaves the income blank, then set it to previous
+        monthlyIncomeEl.textContent > 0 ? income = monthlyIncomeEl.textContent : monthlyIncomeEl.textContent = income;
+        updateLocalStorage();
+        calculateLeftOver();
+    }
+}
+
+// Get edited expense input and amend it to the DOM and recalculate the leftOver
+function getEditedIncome() {
+    isActive = true;
+    monthlyIncomeEl.focus();
+    monthlyIncomeEl.textContent = '';
+    monthlyIncomeEl.addEventListener('keydown', (e) => updateIncome(e));
+}
+
 // Append expense array to localStorage
 function updateLocalStorage() {
     localStorage.setItem('expenses', JSON.stringify(expenses));
@@ -133,35 +154,6 @@ function updateFromLocalStorage() {
     }
 }
 
-function updateIncome(e) {
-    // When enter is pressed then save the new income amount and recalculate leftOver
-    if (e.keyCode === 13 || !isActive) {
-        console.log(isActive);
-        e.preventDefault();
-        monthlyIncomeEl.blur();
-        // If the user edits but leaves the income blank, then set it to previous
-        monthlyIncomeEl.textContent > 0 ? income = monthlyIncomeEl.textContent : monthlyIncomeEl.textContent = income;
-        updateLocalStorage();
-        calculateLeftOver();
-    }
-}
-
-// Get edited expense input and amend it to the DOM and recalculate the leftOver
-function getEditedIncome() {
-    isActive = true;
-    monthlyIncomeEl.focus();
-    monthlyIncomeEl.textContent = '';
-    monthlyIncomeEl.addEventListener('keydown', (e) => updateIncome(e));
-}
-
-// If the click target is outside the income edit icon, then set the isActive to false and update income
-function clickedOutsideIncome(e) {
-    if (e.target !== editIncomeIcon) {
-        isActive = false;
-        updateIncome(e);
-    }
-}
-
 // Get items from local storage on load
 updateFromLocalStorage();
 checkIncomeValue();
@@ -169,4 +161,3 @@ checkIncomeValue();
 // Event listeners
 expenseForm.addEventListener('submit', getInput);
 editIncomeIcon.addEventListener('click', getEditedIncome);
-document.addEventListener('click', (e) => clickedOutsideIncome(e));
