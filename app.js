@@ -8,6 +8,7 @@ const expenseContainer = document.querySelector('.expense-container');
 const totalExpenseEl = document.getElementById('total-expense');
 const monthlyIncomeEl = document.getElementById('monthly-income');
 const moneyLeftEl = document.getElementById('money-left');
+const editIncomeIcon = document.getElementById('edit-icon');
 
 let date = Date;
 let value = 0;
@@ -131,15 +132,25 @@ function updateFromLocalStorage() {
     }
 }
 
+let isActive = false;
+
 // Get edited expense input and amend it to the DOM and recalculate the leftOver
-function getEditedIncome(e) {
-    // When enter is pressed then save the new income amount and recalculate leftOver
-    if (e.keyCode === 13) {
-        e.preventDefault();
-        income = monthlyIncomeEl.textContent;
-        updateLocalStorage();
-        calculateLeftOver();
-    }
+function getEditedIncome() {
+    // isActive = true;
+    // console.log('isActive', isActive);
+    monthlyIncomeEl.focus();
+    monthlyIncomeEl.textContent = '';
+    monthlyIncomeEl.addEventListener('keydown', (e) => {
+        // When enter is pressed then save the new income amount and recalculate leftOver
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            monthlyIncomeEl.blur();
+            // If the user edits but leaves the income blank, then set it to previous
+            monthlyIncomeEl.textContent > 1 ? income = monthlyIncomeEl.textContent : monthlyIncomeEl.textContent = income;
+            updateLocalStorage();
+            calculateLeftOver();
+        }
+    });
 }
 
 // Get items from local storage on load
@@ -148,4 +159,4 @@ checkIncomeValue();
 
 // Event listeners
 expenseForm.addEventListener('submit', getInput);
-monthlyIncomeEl.addEventListener('keydown', (e) => getEditedIncome(e));
+editIncomeIcon.addEventListener('click', getEditedIncome);

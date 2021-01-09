@@ -118,6 +118,11 @@ button:focus {
   color: white;
 }
 
+.fas {
+  padding-left: 5px;
+  cursor: pointer;
+}
+
 .left-over {
   color: #48ff00;
 }
