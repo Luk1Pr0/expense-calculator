@@ -10,7 +10,6 @@ const monthlyIncomeEl = document.getElementById('monthly-income');
 const moneyLeftEl = document.getElementById('money-left');
 const editIncomeIcon = document.getElementById('edit-icon');
 
-let isActive = false;
 let date = Date;
 let value = 0;
 let income = 0;
@@ -19,11 +18,11 @@ let expenseId = 0;
 let leftOver = 0;
 let sum = 0;
 let expenses = [];
+let isFocused = false;
 
 // Get input from the form
 function getInput(e) {
     e.preventDefault();
-    console.log('working');
     if (datePicker.value && expense.value) {
         // Get values of date and expense
         date = datePicker.value.split('-').reverse().join('/');
@@ -116,8 +115,8 @@ function checkIncomeValue() {
 }
 
 function updateIncome(e) {
-    // When enter is pressed or if isActive is false then save the new income amount and recalculate leftOver
-    if (e.keyCode === 13 || !isActive) {
+    // When enter is pressed or if isFocused is false then save the new income amount and recalculate leftOver
+    if (e.keyCode === 13 || !isFocused) {
         e.preventDefault();
         monthlyIncomeEl.blur();
         // If the user edits but leaves the income blank, then set it to previous
@@ -127,12 +126,22 @@ function updateIncome(e) {
     }
 }
 
-// Get edited expense input and amend it to the DOM and recalculate the leftOver
-function getEditedIncome() {
-    isActive = true;
+// Add focus to the income value and change listen for the keyboard input
+function editIncome(e) {
     monthlyIncomeEl.focus();
     monthlyIncomeEl.textContent = '';
-    monthlyIncomeEl.addEventListener('keydown', (e) => updateIncome(e));
+    monthlyIncomeEl.addEventListener('keydown', updateIncome);
+    document.addEventListener('click', checkIfFocused);
+}
+
+// If isFocused is true then set it to false and rerun the updateIncome function
+function checkIfFocused(e) {
+    isFocused = !isFocused;
+    updateIncome(e);
+    // If isFocused is false then remove the event listener
+    if (!isFocused) {
+        document.removeEventListener('click', checkIfFocused);
+    }
 }
 
 // Append expense array to localStorage
@@ -160,4 +169,4 @@ checkIncomeValue();
 
 // Event listeners
 expenseForm.addEventListener('submit', getInput);
-editIncomeIcon.addEventListener('click', getEditedIncome);
+editIncomeIcon.addEventListener('click', editIncome);
