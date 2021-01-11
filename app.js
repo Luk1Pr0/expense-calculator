@@ -9,7 +9,7 @@ const totalExpenseEl = document.getElementById('total-expense');
 const monthlyIncomeEl = document.getElementById('monthly-income');
 const moneyLeftEl = document.getElementById('money-left');
 const editIncomeIcon = document.getElementById('edit-icon');
-const removeExpenseIcon = document.getElementById('remove-expense');
+// const removeExpenseIcon = document.getElementById('remove-expense');
 
 let date = Date;
 let value = 0;
@@ -87,7 +87,6 @@ function rebuildDOM() {
         expenseContainer.appendChild(expenseCard);
         // Append the monthly income into the DOM
         monthlyIncomeEl.textContent = income;
-        // Add event listener to the removeExpense icon
         icon.addEventListener('click', (e) => removeExpense(e, expense));
         updateLocalStorage();
     });
@@ -167,7 +166,6 @@ function removeExpense(e, expense) {
             // Remove the selected item from the array
             expenses.splice(i, i + 1);
             updateLocalStorage();
-            rebuildDOM();
             calculateTotalExpense();
         }
     });
