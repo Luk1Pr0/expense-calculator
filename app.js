@@ -9,6 +9,7 @@ const totalExpenseEl = document.getElementById('total-expense');
 const monthlyIncomeEl = document.getElementById('monthly-income');
 const moneyLeftEl = document.getElementById('money-left');
 const editIncomeIcon = document.getElementById('edit-icon');
+const removeExpenseIcon = document.getElementById('remove-expense');
 
 let date = Date;
 let value = 0;
@@ -49,15 +50,20 @@ function updateDOM() {
     const expenseCard = document.createElement('div');
     const header2 = document.createElement('h2');
     const header3 = document.createElement('h3');
+    const icon = document.createElement('i');
     // Crete data
     expenseCard.classList.add('expense-card');
+    icon.classList.add('far', 'fa-minus-square');
+    icon.setAttribute('id', 'remove-expense');
     header2.textContent = `£${value}`;
     header3.textContent = date;
     // Append data to the expense card and expense card to the container
-    expenseCard.append(header2, header3);
+    expenseCard.append(icon, header2, header3);
     expenseContainer.appendChild(expenseCard);
     // Append the monthly income into the DOM
     monthlyIncomeEl.textContent = income;
+    // Add event listener to the removeExpense icon
+    icon.addEventListener('click', (e) => removeExpense(e, expense));
     updateLocalStorage();
     calculateTotalExpense();
 }
@@ -69,15 +75,21 @@ function rebuildDOM() {
         const expenseCard = document.createElement('div');
         const header2 = document.createElement('h2');
         const header3 = document.createElement('h3');
+        const icon = document.createElement('i');
         // Crete data and add class to the card
         expenseCard.classList.add('expense-card');
+        icon.classList.add('far', 'fa-minus-square');
+        icon.setAttribute('id', 'remove-expense');
         header2.textContent = `£${expense.value}`;
         header3.textContent = expense.date;
         // Append data to the expense card and expense card to the container
-        expenseCard.append(header2, header3);
+        expenseCard.append(icon, header2, header3);
         expenseContainer.appendChild(expenseCard);
         // Append the monthly income into the DOM
         monthlyIncomeEl.textContent = income;
+        // Add event listener to the removeExpense icon
+        icon.addEventListener('click', (e) => removeExpense(e, expense));
+        updateLocalStorage();
     });
     calculateTotalExpense();
 }
@@ -142,6 +154,23 @@ function checkIfFocused(e) {
     if (!isFocused) {
         document.removeEventListener('click', checkIfFocused);
     }
+}
+
+// When the remove expense icon is clicked, remove the selected expense
+function removeExpense(e, expense) {
+    // If item id === expense id, then remove the object with the given index from expenses array
+    expenses.forEach((item, i) => {
+        // If item from the expenses array matches the expense object then remove it
+        if (item.id === expense.id) {
+            const el = e.srcElement.parentNode;
+            el.remove();
+            // Remove the selected item from the array
+            expenses.splice(i, i + 1);
+            updateLocalStorage();
+            rebuildDOM();
+            calculateTotalExpense();
+        }
+    });
 }
 
 // Append expense array to localStorage

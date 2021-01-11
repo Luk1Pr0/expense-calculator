@@ -162,6 +162,24 @@ section {
   border-radius: 15px;
   -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.fa-minus-square {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px 10px 0 0;
+  cursor: pointer;
+  color: crimson;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.fa-minus-square:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 
 .expense-card h2 {
